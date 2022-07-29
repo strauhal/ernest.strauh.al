@@ -29,9 +29,6 @@ a{
 a:hover {
 	text-decoration: underline;
 	cursor: pointer;
-	animation: changeColor 3s;
-	animation-iteration-count: infinite;
-	animation-direction: alternate-reverse;
 }
 
 a:visited {
@@ -87,12 +84,6 @@ img:hover {
 animation: changeColor 3s;
 animation-iteration-count: infinite;
 animation-direction: alternate-reverse;
-}
-
-@keyframes changeColor {
-  0%   { filter: hue-rotate(0deg)saturate(100%); }
-  50%  { filter: hue-rotate(360deg)saturate(1000%); }
-  100% { filter: hue-rotate(0deg)saturate(100%); }
 }
 
 @media screen and (max-width: 600px) {
