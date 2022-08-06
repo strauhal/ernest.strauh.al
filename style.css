@@ -1,0 +1,110 @@
+body{
+	margin-top: 18vh;
+	margin-bottom: 150px;
+	font-family: times new roman;
+	color: black;
+	overflow-x: hidden;
+}
+
+h1{
+	font-weight: 200;
+	font-size: 24pt;
+	letter-spacing: -1pt;
+	text-align: center;
+}
+
+p{
+	line-height: 0.25;
+	font-size: 14pt;
+	text-decoration: none;
+	text-align: center
+}
+
+a{
+	text-decoration: none;
+	text-align: center
+	color: #00f;
+}
+
+a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+	filter: saturate(0%);
+}
+
+a:visited {
+	color: #00f;
+}
+
+img {
+	width: 50vh;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img:hover {
+	filter: saturate(0%);
+}
+
+#ernest img {
+	margin-top: 10vh;	
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#about {
+	cursor: move;
+	position: absolute;
+	top: 20vh;
+	left: 10vw;
+	white-space: nowrap;
+	padding: 50px 100px 50px 100px;
+	background-color: white;
+	outline-style: solid;
+	outline-width: 0.1px;
+}
+
+#contact {
+	cursor: move;
+	position: absolute;
+	top: 40vh;
+	left: 25vw;
+	white-space: nowrap;
+	padding: 50px 100px 50px 100px;
+	background-color: white;
+	outline-style: solid;
+	outline-width: 0.1px;
+}
+
+#links {
+	margin-top: 100px;
+	color: #00f;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+	img {
+		max-width: 75%;
+	}
+
+	#about {
+		position: absolute;
+		top: 10vh;
+		left: 1vw;
+		width: 80vw;
+		white-space: nowrap;
+		padding: 50px 30px 60px 30px;
+		outline-width: 0.1px;
+	}
+
+	#contact {
+		position: absolute;
+		top: 25vh;
+		left: 1vw;
+		width: 80vw;
+		padding: 50px 30px 60px 30px;
+	}
+}
