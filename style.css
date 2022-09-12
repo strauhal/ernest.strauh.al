@@ -28,8 +28,6 @@ a{
 
 a:hover {
 	text-decoration: underline;
-	cursor: pointer;
-	filter: saturate(0%);
 }
 
 a:visited {
@@ -44,7 +42,11 @@ img {
 }
 
 img:hover {
-	filter: saturate(0%);
+	filter: contrast(750%) saturate(0%);
+}
+
+.close:hover {
+	background-color: #f00;
 }
 
 #ernest img {
