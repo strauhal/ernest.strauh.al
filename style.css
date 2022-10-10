@@ -56,6 +56,14 @@ img:hover {
 	margin-right: auto;
 }
 
+.vid {
+	margin-top: 10vh;
+	display: block;
+	width: 33vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #about {
 	cursor: move;
 	position: absolute;
