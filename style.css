@@ -55,7 +55,22 @@ img {
 .vid {
 	margin-top: 10vh;
 	display: block;
-	width: 33vw;
+	width: 55vh;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.vid_text {
+	display: none;
+	padding: 0px;
+}
+
+.vid:hover + .vid_text {
+	display: block;
+	padding: 0px;
+	position: absolute;
+	width: 100vw;
+	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
