@@ -112,6 +112,14 @@ img {
 		max-width: 75%;
 	}
 
+	.vid {
+		width: 40vh;
+	}
+
+	iframe {
+		width: 40vh;
+	}
+
 	#about {
 		position: absolute;
 		top: 10vh;
