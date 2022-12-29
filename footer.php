@@ -1,3 +1,5 @@
+<html>
+
 	<div id="about">
 		<p>M.F.A. School of the Art Institute of Chicago, 2024.</p>
 		<p>B.F.A. California College of the Arts, 2022.</p><br>
@@ -24,3 +26,4 @@
 		<a href="http://studio.strauh.al">studio</a>&nbsp;&nbsp;&nbsp;
 		<a href="http://strauh.al">strauh.al</a>
 	</p></div>
+</html>
