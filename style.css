@@ -14,7 +14,7 @@ h1 {
 }
 
 p {
-	line-height: 0.25;
+	line-height: 1;
 	font-size: 14pt;
 	text-decoration: none;
 	text-align: center
@@ -39,6 +39,10 @@ img {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.work img {
+	width: 80vh;
 }
 
 .close:hover {
@@ -114,6 +118,10 @@ img {
 
 	.vid {
 		width: 40vh;
+	}
+
+	.vid_text {
+		display: none;
 	}
 
 	iframe {
