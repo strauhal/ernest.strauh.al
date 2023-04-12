@@ -41,19 +41,9 @@ img {
 	margin-right: auto;
 }
 
-.work img {
-	width: 80vh;
-}
 
 .close:hover {
 	background-color: #f00;
-}
-
-#ernest img {
-	margin-top: 10vh;	
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .vid {
