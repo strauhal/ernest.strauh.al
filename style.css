@@ -54,30 +54,6 @@ img {
 	margin-right: auto;
 }
 
-.vid {
-	margin-top: 10vh;
-	display: block;
-	width: 55vh;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.vid_text {
-	display: none;
-	padding: 0px;
-	color: #fff;
-}
-
-.vid:hover + .vid_text {
-	display: block;
-	margin-top: -30vh;
-	position: absolute;
-	width: 100vw;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
 #about {
 	cursor: move;
 	position: absolute;
@@ -110,6 +86,10 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+	body {
+		overflow-x: hidden;
+	}
+
 	img {
 		max-width: 75%;
 	}
