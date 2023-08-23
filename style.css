@@ -46,6 +46,14 @@ img {
 	background-color: #f00;
 }
 
+.vimeo {
+	margin-top: 10vh;
+	display: block;
+	width: 55vh;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .vid {
 	margin-top: 10vh;
 	display: block;
