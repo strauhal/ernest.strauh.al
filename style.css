@@ -53,6 +53,12 @@ img {
 	margin-right: auto;
 }
 
+.luma {
+	margin-top: 10vh;
+	display: block;
+	height: 50vh;
+}
+
 #about {
 	cursor: move;
 	position: absolute;
