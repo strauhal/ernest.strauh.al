@@ -57,6 +57,8 @@ img {
 	margin-top: 10vh;
 	display: block;
 	height: 50vh;
+	width: 50vw;
+	margin-left: 25vw;
 }
 
 #about {
@@ -129,7 +131,5 @@ img {
 		padding: 50px 30px 60px 30px;
 	}
 
-	.luma {
-	margin-left: 12.5vw ;
-	}
+
 }
