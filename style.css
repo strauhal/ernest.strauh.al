@@ -110,7 +110,8 @@ img {
 	}
 
 	iframe {
-		width: 40vh;
+		width: 33vh;
+		margin-left: 0vw;
 	}
 
 	#about {
