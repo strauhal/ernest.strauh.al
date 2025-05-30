@@ -68,22 +68,32 @@ img {
 </body>
 <script src="script.js" defer></script>
 
-<script>
-  const img = document.getElementById('hueImage');
+  <script>
+    const img = document.getElementById('hueImage');
 
-  window.addEventListener('mousemove', (e) => {
-    const xRatio = e.clientX / window.innerWidth;
-    const yRatio = e.clientY / window.innerHeight;
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-    // Map to hue-rotate in degrees (0–360)
-    const hue = Math.floor(xRatio * 360);
+    if (isMobile) {
+      // mobile: scroll to rotate hue
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const hue = scrollY % 360;
+        img.style.filter = `hue-rotate(${hue}deg)`;
+      });
+    } else {
+      // desktop: mouse move to rotate hue + saturation
+      window.addEventListener('mousemove', (e) => {
+        const xRatio = e.clientX / window.innerWidth;
+        const yRatio = e.clientY / window.innerHeight;
 
-    // Optional: Map Y to brightness or contrast or saturation
-    const saturation = 50 + yRatio * 100; // 50% to 150%
+        const hue = Math.floor(xRatio * 360);
+        const saturation = 50 + yRatio * 100; // 50% to 150%
 
-    img.style.filter = `hue-rotate(${hue}deg) saturate(${saturation}%)`;
-  });
-</script>
+        img.style.filter = `hue-rotate(${hue}deg) saturate(${saturation}%)`;
+      });
+    }
+  </script>
+
 
 
 </html>
