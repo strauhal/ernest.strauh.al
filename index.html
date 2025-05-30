@@ -69,31 +69,112 @@ img {
 <script src="script.js" defer></script>
 
   <script>
-    const img = document.getElementById('hueImage');
+  const img = document.getElementById('hueImage');
 
-    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  // Detect mobile device based on user agent string
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-    if (isMobile) {
-      // mobile: scroll to rotate hue
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const hue = scrollY % 360;
-        img.style.filter = `hue-rotate(${hue}deg)`;
-      });
+  // Current and target values for hue and saturation
+  let currentHue = 0;
+  let targetHue = 0;
+  let currentSaturation = 150;
+  let targetSaturation = 150;
+
+  // Used to determine whether the user is interacting (to pause auto hue shift)
+  let userActive = false;
+  let userTimeout;
+
+  // This controls how fast the transition between current and target hue/saturation happens
+  // ⏱️ Lower = slower transition, Higher = snappier/more reactive
+  const ease = 0.2;
+
+  function animate() {
+    // Interpolate toward target values using easing
+    currentHue += (targetHue - currentHue) * ease;
+    currentSaturation += (targetSaturation - currentSaturation) * ease;
+
+    // 🔮 This is where visual magic happens — CSS filter applying the hue and saturation
+    img.style.filter = `hue-rotate(${currentHue}deg) saturate(${currentSaturation}%)`;
+
+    // 🔁 Keep looping to update animation
+    requestAnimationFrame(animate);
+  }
+
+  animate(); // Start the animation loop
+
+  // Called when user interacts — stops automatic hue shifting for a while
+  function resetUserTimer() {
+    userActive = true;
+
+    // ⏱️ Duration (in ms) of how long user input "freezes" the automatic effect
+    // After this timeout, auto hue will resume
+    clearTimeout(userTimeout);
+    userTimeout = setTimeout(() => {
+      userActive = false;
+    }, 1000); // <- 🔧 Change this if you want the "manual mode" to last longer or shorter
+  }
+
+  if (isMobile) {
+    // 📱 Mobile: use vertical scroll position to control hue
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+
+      // 🎨 This determines how far scrolling moves the hue shift
+      // You can multiply scrollY if you want faster hue shifting per pixel
+      targetHue = scrollY % 360;
+
+      // 🎨 Set saturation while user is scrolling
+      targetSaturation = 200; // <- 🔧 bump this for even more vivid color
+
+      resetUserTimer();
+    });
+  } else {
+    // 🖱️ Desktop: use cursor X for hue, Y for saturation
+    window.addEventListener('mousemove', (e) => {
+      const xRatio = e.clientX / window.innerWidth;
+      const yRatio = e.clientY / window.innerHeight;
+
+      // 🎨 Horizontal mouse position maps to hue (0–360)
+      targetHue = Math.floor(xRatio * 360);
+
+      // 🎨 Vertical mouse position maps to saturation (100–200%)
+      // You can adjust this range to make it flatter or more extreme
+      targetSaturation = 100 + yRatio * 100;
+
+      resetUserTimer();
+    });
+  }
+
+  // 🌈 Automatic idle hue animation (kicks in when user isn't interacting)
+  // Direction flag for oscillating hue (true = increasing, false = decreasing)
+let hueIncreasing = true;
+
+setInterval(() => {
+  if (!userActive) {
+    // 🔄 How much hue should shift per tick — higher = faster
+    const hueStep = 5;
+
+    // ↔️ Oscillate between 0 and 360 instead of looping
+    if (hueIncreasing) {
+      targetHue += hueStep;
+      if (targetHue >= 360) {
+        targetHue = 360;
+        hueIncreasing = false; // reverse direction
+      }
     } else {
-      // desktop: mouse move to rotate hue + saturation
-      window.addEventListener('mousemove', (e) => {
-        const xRatio = e.clientX / window.innerWidth;
-        const yRatio = e.clientY / window.innerHeight;
-
-        const hue = Math.floor(xRatio * 360);
-        const saturation = 50 + yRatio * 100; // 50% to 150%
-
-        img.style.filter = `hue-rotate(${hue}deg) saturate(${saturation}%)`;
-      });
+      targetHue -= hueStep;
+      if (targetHue <= 0) {
+        targetHue = 0;
+        hueIncreasing = true; // reverse direction
+      }
     }
-  </script>
 
+    // 🎨 Saturation stays constant or you can oscillate it too if you want!
+    targetSaturation = 150;
+  }
+}, 40); // ⏱️ interval in ms — faster = smoother animation
+
+</script>
 
 
 </html>
