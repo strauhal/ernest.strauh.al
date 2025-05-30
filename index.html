@@ -16,6 +16,18 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
+
+	<style type="text/css">
+		
+img {
+      width: 66vh;
+      transition: filter 0.1s ease-out;
+      will-change: filter;
+      pointer-events: none;
+    }
+
+	</style>
+
 </head>
 
 <body onload="hide()">
@@ -26,7 +38,7 @@
 
 <br><br><br>
 
-<img src="her600.png">
+<img id="hueImage" src="her_new.png">
 
 	<div id="about">
 		<p>
@@ -44,7 +56,6 @@
 			twitter -&nbsp;<a href="https://www.twitter.com/erneststrauhal">twitter.com/erneststrauhal</a><br><br><br>
 			email -&nbsp;<a href="mailto:ernest@strauh.al">ernest@strauh.al</a><br><br><br>
 			cv and artist statement provided upon request.</p><br>
-			<img src="lovers.png">
 		</p><br>
 		<p style="color: red;"><a onclick="contact()">[x] close</a></p>
 	</div>
@@ -58,4 +69,23 @@
 
 </body>
 <script src="script.js" defer></script>
+
+<script>
+  const img = document.getElementById('hueImage');
+
+  window.addEventListener('mousemove', (e) => {
+    const xRatio = e.clientX / window.innerWidth;
+    const yRatio = e.clientY / window.innerHeight;
+
+    // Map to hue-rotate in degrees (0–360)
+    const hue = Math.floor(xRatio * 360);
+
+    // Optional: Map Y to brightness or contrast or saturation
+    const saturation = 50 + yRatio * 100; // 50% to 150%
+
+    img.style.filter = `hue-rotate(${hue}deg) saturate(${saturation}%)`;
+  });
+</script>
+
+
 </html>
