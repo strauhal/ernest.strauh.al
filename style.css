@@ -116,7 +116,7 @@ img {
 
 	#about {
 		position: absolute;
-		top: 10vh;
+		top: 20vh;
 		left: 1vw;
 		width: 80vw;
 		white-space: nowrap;
@@ -126,7 +126,7 @@ img {
 
 	#contact {
 		position: absolute;
-		top: 25vh;
+		top: 35vh;
 		left: 1vw;
 		width: 80vw;
 		padding: 50px 30px 60px 30px;

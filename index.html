@@ -19,10 +19,25 @@
 
 	<style type="text/css">
 		
-img {
-      transition: filter 0.1s ease-out;
-      will-change: filter;
+video {
+      width: 20vw;
+      margin-left: 40vw;
     }
+
+#about p {
+	text-align: left;
+}
+
+#contact p {
+	text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+
+	video {
+		width: 95vw;
+		margin-left: 0vw;
+	}
 
 	</style>
 
@@ -36,14 +51,16 @@ img {
 
 <br><br><br>
 
-<img id="hueImage" src="ernest_final.png" loading="lazy">
+<video src="dance.mp4" autoplay loop muted playsinline></video>
+
+<p>Momentum, 2025</p>
 
 	<div id="about">
 		<p>
-			<a href="http://ernest.strauh.al/charlatan">charlatan</a></p><br>
-			<img src="work4cs1.png">
-			<p><i>Untitled 4 (Color Study 1), 2023</i></p>
-		<br>
+			my name is ernest strauhal.  <br>
+			i run an online archive called <a href="https://strauh.al">strauh.al</a>.<br>
+			a portfolio of my work can be viewed at <a href="https://studio.strauh.al">studio.strauh.al</a>.<br>
+		</p>
 		<p style="color: red;"><a onclick="about()">[x] close</a></p>
 	</div>
 
@@ -52,9 +69,9 @@ img {
 			instagram -&nbsp;<a href="https://instagram.com/erneststrauhal">instagram.com/erneststrauhal</a><br>
 			youtube -&nbsp;<a href="https://www.youtube.com/@strauhal">youtube.com/@strauhal</a><br>
 			twitter -&nbsp;<a href="https://www.twitter.com/erneststrauhal">twitter.com/erneststrauhal</a><br><br><br>
-			email -&nbsp;<a href="mailto:ernest@strauh.al">ernest@strauh.al</a><br><br><br>
-			cv and artist statement provided upon request.</p><br>
-		</p><br>
+			email -&nbsp;<a href="mailto:ernest@strauh.al">ernest@strauh.al</a><br>
+			cv and artist statement provided upon request.<br>
+		</p>
 		<p style="color: red;"><a onclick="contact()">[x] close</a></p>
 	</div>
 
@@ -67,103 +84,5 @@ img {
 
 </body>
 <script src="script.js" defer></script>
-
-<script>
-const img = document.getElementById('hueImage');
-
-// Detect mobile
-const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-
-// Track state
-let currentHue = 0;
-let targetHue = 0;
-let currentSaturation = 150;
-let targetSaturation = 150;
-let userActive = false;
-let userTimeout;
-let hueIncreasing = true;
-
-// Ease factor — higher = faster change
-const ease = 0.2;
-
-// Animate loop
-function animate() {
-  currentHue += (targetHue - currentHue) * ease;
-  currentSaturation += (targetSaturation - currentSaturation) * ease;
-  img.style.filter = `hue-rotate(${currentHue}deg) saturate(${currentSaturation}%)`;
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Reset user interaction
-function resetUserTimer() {
-  userActive = true;
-  clearTimeout(userTimeout);
-  userTimeout = setTimeout(() => {
-    userActive = false;
-  }, 1000); // User remains "active" for 1s after input
-}
-
-// Throttle helper
-function throttle(fn, limit) {
-  let lastCall = 0;
-  return function (...args) {
-    const now = Date.now();
-    if (now - lastCall >= limit) {
-      lastCall = now;
-      fn.apply(this, args);
-    }
-  };
-}
-
-// Scroll-based hue (MOBILE)
-if (isMobile) {
-  window.addEventListener(
-    'scroll',
-    throttle(() => {
-      const scrollY = window.scrollY;
-      targetHue = scrollY % 360;
-      targetSaturation = 200;
-      resetUserTimer();
-    }, 50), // Run max every 50ms
-    { passive: true }
-  );
-} else {
-  // Mousemove-based hue (DESKTOP)
-  window.addEventListener(
-    'mousemove',
-    throttle((e) => {
-      const xRatio = e.clientX / window.innerWidth;
-      const yRatio = e.clientY / window.innerHeight;
-      targetHue = Math.floor(xRatio * 360);
-      targetSaturation = 100 + yRatio * 100;
-      resetUserTimer();
-    }, 30) // Max every 30ms
-  );
-}
-
-// Auto hue oscillation when idle
-setInterval(() => {
-  if (!userActive) {
-    const step = isMobile ? 2 : 4; // slower on mobile
-    if (hueIncreasing) {
-      targetHue += step;
-      if (targetHue >= 360) {
-        targetHue = 360;
-        hueIncreasing = false;
-      }
-    } else {
-      targetHue -= step;
-      if (targetHue <= 0) {
-        targetHue = 0;
-        hueIncreasing = true;
-      }
-    }
-    targetSaturation = 150;
-  }
-}, 60); // smoother but slower interval for performance
-
-</script>
-
 
 </html>
