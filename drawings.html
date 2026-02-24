@@ -19,17 +19,14 @@
 
 	<style>
 		
-	#about p {
-		text-align: left;
-	}
+    #about p {
+    	text-align: left;
+    }
 
-	#contact p {
-		text-align: right;
-	}
+    #contact p {
+    	text-align: right;
+    }
 
-
-
-    /* 2. THE GRID (The Album Back Cover) */
     #grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -39,8 +36,8 @@
       padding: 20px;
     }
     #grid img {
-      width: 50%;
-      height: 100%;
+      width: 75%;
+      height: 75%;
       object-fit: contain; /* Keeps your sketches from getting chopped up */
       cursor: pointer;
     }
@@ -49,36 +46,37 @@
       grid-column: span 2;
     }
 
-    /* 3. THE STAGE (The Slideshow Overlay) */
     #slideshow {
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: #ffffff;
-      justify-content: center;
-      align-items: center;
       z-index: 100;
       cursor: pointer;
+      overflow-x: auto; /* Lets the wide tracks scroll horizontally */
+      overflow-y: hidden;
+      text-align: center; /* Centers the standard single pages */
+      white-space: nowrap;
     }
     #slideshow.active {
-      display: flex;
+      display: block; /* Removed flexbox so wide spreads can scroll naturally */
     }
 
-    /* 4. THE SPOTLIGHT (The Currently Displayed Image) */
     #stage-container {
       position: relative;
-      max-width: 95vw;
-      max-height: 95vh;
+      display: inline-block;
+      height: 95vh; /* Locks the height so every page feels uniform */
+      margin-top: 2.5vh; /* Centers the stage vertically */
       cursor: default; 
     }
     #stage-container img {
       display: block;
-      max-width: 95vw;
-      max-height: 95vh;
+      height: 100%;
+      width: auto; /* Lets the double-spread expand as wide as it needs */
+      max-width: none; /* Removes the width limit */
       object-fit: contain;
     }
 
-    /* 5. THE NAVIGATION ZONES */
     .nav-zone {
       position: absolute;
       top: 0;
@@ -95,7 +93,6 @@
       right: 0;
       cursor: e-resize; /* Built-in East (Right) arrow */
     }
-
 	</style>
 
 </head>
@@ -146,17 +143,8 @@
 		<p style="color: red;"><a onclick="contact()">[x] close</a></p>
 	</div>
 
-	<div id="links"><p>
-		<a onclick="about()">about</a> &nbsp;&nbsp;&nbsp;
-		<a onclick="contact()">contact</a> &nbsp;&nbsp;&nbsp;
-    <a href="https://ernest.strauh.al/drawings">drawings</a> &nbsp;&nbsp;&nbsp;
-		<a href="http://studio.strauh.al">work</a> &nbsp;&nbsp;&nbsp;
-		<a href="http://strauh.al">archive</a>
-	</p></div>
-
   <script>
     const images = [
-      "drawings/abu_ghraib copy.jpg",
       "drawings/anatomy 1 copy.jpg",
       "drawings/anatomy 10 copy.jpg",
       "drawings/anatomy 11 copy.jpg",
@@ -184,6 +172,7 @@
       "drawings/coffee_with_friends copy.jpg",
       "drawings/cornelius_van_der_geest copy.jpg",
       "drawings/cowboy copy.jpg",
+      "drawings/abu_ghraib copy.jpg",
       "drawings/face2 copy.jpg",
       "drawings/face3 copy.jpg",
       "drawings/face4 copy.jpg",
