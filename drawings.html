@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="ernest.strauh.al"/>
+    <meta property="og:image" content="android-chrome-512x512.png" />
+
+<title>ernest.strauh.al</title>
+
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="{Favicon}">
+	<link rel="alternate" type="application/rss+xml" href="{RSS}">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+
+	<style type="text/css">
+		
+video {
+      width: 20vw;
+      margin-left: 40vw;
+    }
+
+#about p {
+	text-align: left;
+}
+
+#contact p {
+	text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+
+	video {
+		width: 95vw;
+		margin-left: 0vw;
+	}
+
+	</style>
+
+</head>
+
+<body onload="hide()">
+	
+	<h1><a href="http://ernest.strauh.al">ernest.strauh.al</a></h1>
+
+		<p>許志仁</p>
+
+<br><br><br>
+
+<video src="dance.mp4" autoplay loop muted playsinline></video>
+
+<p>Momentum, 2025</p>
+
+	<div id="about">
+		<p>
+			my name is ernest strauhal.  <br>
+			i run an online archive called <a href="https://strauh.al">strauh.al</a>.<br>
+			a portfolio of my work can be viewed at <a href="https://studio.strauh.al">studio.strauh.al</a>.<br><br>
+
+
+		</p>
+		<p style="color: red;"><a onclick="about()">[x] close</a></p>
+	</div>
+
+	<div id="contact">
+		<p>
+			instagram -&nbsp;<a href="https://instagram.com/erneststrauhal">instagram.com/erneststrauhal</a><br>
+			youtube -&nbsp;<a href="https://www.youtube.com/@strauhal">youtube.com/@strauhal</a><br>
+			email -&nbsp;<a href="mailto:ernest@strauh.al">ernest@strauh.al</a><br>
+			cv and artist statement provided upon request.<br>
+		</p>
+		<p style="color: red;"><a onclick="contact()">[x] close</a></p>
+	</div>
+
+	<div id="links"><p>
+		<a onclick="about()">about</a> &nbsp;&nbsp;&nbsp;
+		<a onclick="contact()">contact</a> &nbsp;&nbsp;&nbsp;
+		<a href="http://studio.strauh.al">work</a> &nbsp;&nbsp;&nbsp;
+		<a href="http://strauh.al">archive</a>
+	</p></div>
+
+</body>
+<script src="script.js" defer></script>
+
+</html>
