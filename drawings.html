@@ -17,27 +17,84 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
 
-	<style type="text/css">
+	<style>
 		
-video {
-      width: 20vw;
-      margin-left: 40vw;
+	#about p {
+		text-align: left;
+	}
+
+	#contact p {
+		text-align: right;
+	}
+
+
+
+    /* 2. THE GRID (The Album Back Cover) */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: 250px; /* Lock the height so single and double pages align perfectly */
+      grid-auto-flow: dense; /* Automatically fills in any blank holes left by wide images */
+      gap: 15px;
+      padding: 20px;
+    }
+    #grid img {
+      width: 50%;
+      height: 100%;
+      object-fit: contain; /* Keeps your sketches from getting chopped up */
+      cursor: pointer;
+    }
+    /* This class is handed out by our script to any wide image */
+    #grid img.wide-spread {
+      grid-column: span 2;
     }
 
-#about p {
-	text-align: left;
-}
+    /* 3. THE STAGE (The Slideshow Overlay) */
+    #slideshow {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #ffffff;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      cursor: pointer;
+    }
+    #slideshow.active {
+      display: flex;
+    }
 
-#contact p {
-	text-align: right;
-}
+    /* 4. THE SPOTLIGHT (The Currently Displayed Image) */
+    #stage-container {
+      position: relative;
+      max-width: 95vw;
+      max-height: 95vh;
+      cursor: default; 
+    }
+    #stage-container img {
+      display: block;
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+    }
 
-@media screen and (max-width: 600px) {
-
-	video {
-		width: 95vw;
-		margin-left: 0vw;
-	}
+    /* 5. THE NAVIGATION ZONES */
+    .nav-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+    }
+    
+    #zone-left {
+      left: 0;
+      cursor: w-resize; /* Built-in West (Left) arrow */
+    }
+    
+    #zone-right {
+      right: 0;
+      cursor: e-resize; /* Built-in East (Right) arrow */
+    }
 
 	</style>
 
@@ -51,9 +108,22 @@ video {
 
 <br><br><br>
 
-<video src="dance.mp4" autoplay loop muted playsinline></video>
+  <!-- The empty div where our script builds the image grid -->
+  <div id="grid"></div>
 
-<p>Momentum, 2025</p>
+  <!-- The Slideshow overlay. -->
+  <div id="slideshow">
+    
+    <!-- The stage container. -->
+    <div id="stage-container">
+      <img id="current-slide" src="" alt="Slideshow View">
+      
+      <!-- Invisible clickable areas for left/right navigation -->
+      <div id="zone-left" class="nav-zone"></div>
+      <div id="zone-right" class="nav-zone"></div>
+    </div>
+
+  </div>
 
 	<div id="about">
 		<p>
@@ -79,9 +149,176 @@ video {
 	<div id="links"><p>
 		<a onclick="about()">about</a> &nbsp;&nbsp;&nbsp;
 		<a onclick="contact()">contact</a> &nbsp;&nbsp;&nbsp;
+    <a href="https://ernest.strauh.al/drawings">drawings</a> &nbsp;&nbsp;&nbsp;
 		<a href="http://studio.strauh.al">work</a> &nbsp;&nbsp;&nbsp;
 		<a href="http://strauh.al">archive</a>
 	</p></div>
+
+  <script>
+    const images = [
+      "drawings/abu_ghraib copy.jpg",
+      "drawings/anatomy 1 copy.jpg",
+      "drawings/anatomy 10 copy.jpg",
+      "drawings/anatomy 11 copy.jpg",
+      "drawings/anatomy 12 copy.jpg",
+      "drawings/anatomy 2 copy.jpg",
+      "drawings/anatomy 3 copy.jpg",
+      "drawings/anatomy 4 copy.jpg",
+      "drawings/anatomy 5 copy.jpg",
+      "drawings/anatomy 6 copy.jpg",
+      "drawings/anatomy 7 copy.jpg",
+      "drawings/anatomy 8 copy.jpg",
+      "drawings/anatomy 9 copy.jpg",
+      "drawings/anatomy copy 2.jpg",
+      "drawings/anatomy copy.jpg",
+      "drawings/anatomy1 copy.jpg",
+      "drawings/anatomy2 copy.jpg",
+      "drawings/anatomy3 copy.jpg",
+      "drawings/anatomy4 copy.jpg",
+      "drawings/anatomy5 copy.jpg",
+      "drawings/anatomy6 copy.jpg",
+      "drawings/anatomy_doublefold copy.jpg",
+      "drawings/angel copy.jpg",
+      "drawings/athleisure copy.jpg",
+      "drawings/boy copy.jpg",
+      "drawings/coffee_with_friends copy.jpg",
+      "drawings/cornelius_van_der_geest copy.jpg",
+      "drawings/cowboy copy.jpg",
+      "drawings/face2 copy.jpg",
+      "drawings/face3 copy.jpg",
+      "drawings/face4 copy.jpg",
+      "drawings/face5 copy.jpg",
+      "drawings/face6 copy.jpg",
+      "drawings/face7 copy.jpg",
+      "drawings/face8 copy.jpg",
+      "drawings/face_melter.jpg",
+      "drawings/fashion1 copy.jpg",
+      "drawings/figure1 copy.jpg",
+      "drawings/figure2 copy.jpg",
+      "drawings/figure3 copy.jpg",
+      "drawings/figure4 copy.jpg",
+      "drawings/figure5 copy.jpg",
+      "drawings/frontprofile copy.jpg",
+      "drawings/hands copy.jpg",
+      "drawings/headache copy.jpg",
+      "drawings/lady copy.jpg",
+      "drawings/macintosh copy.jpg",
+      "drawings/nightvisit copy.jpg",
+      "drawings/pedestal copy.jpg",
+      "drawings/projections copy.jpg",
+      "drawings/rhythm0 copy.jpg",
+      "drawings/rhythm1 copy.jpg",
+      "drawings/rhythm2 copy.jpg",
+      "drawings/standing_pose copy.jpg",
+      "drawings/thoughtloop copy.jpg",
+      "drawings/two_figures copy.jpg",
+      "drawings/wittgenstein copy.jpg"
+    ];
+
+    let currentIndex = 0;
+    
+    const gridEl = document.getElementById('grid');
+    const slideshowEl = document.getElementById('slideshow');
+    const currentSlideEl = document.getElementById('current-slide');
+    const zoneLeftEl = document.getElementById('zone-left');
+    const zoneRightEl = document.getElementById('zone-right');
+    const stageContainerEl = document.getElementById('stage-container');
+
+    // ==========================================
+    // 2. BUILD THE GRID
+    // ==========================================
+    images.forEach((src, index) => {
+      const img = document.createElement('img');
+      img.src = src;
+      
+      // Check the dimensions once the image loads to see if it's a wide spread
+      img.onload = () => {
+        // If the width is at least 1.2x bigger than the height, it's a spread
+        if (img.naturalWidth > img.naturalHeight * 1.2) {
+          img.classList.add('wide-spread');
+        }
+      };
+
+      // Plug the thumbnail directly into the openSlideshow function
+      img.addEventListener('click', () => openSlideshow(index));
+      gridEl.appendChild(img);
+    });
+
+    // ==========================================
+    // 3. SLIDESHOW CONTROLS (The Backstage Crew)
+    // ==========================================
+    
+    function openSlideshow(index) {
+      currentIndex = index;
+      updateSlideImage();
+      slideshowEl.classList.add('active'); // Fade in the stage
+    }
+
+    function closeSlideshow() {
+      slideshowEl.classList.remove('active'); // Fade out the stage
+    }
+
+    function changeSlide(direction) {
+      currentIndex = currentIndex + direction;
+      
+      // Loop back to the beginning if we go past the end
+      if (currentIndex >= images.length) {
+        currentIndex = 0;
+      }
+      // Skip to the end if we go backwards past the first image
+      if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+      }
+      
+      updateSlideImage();
+    }
+
+    function updateSlideImage() {
+      currentSlideEl.src = images[currentIndex];
+    }
+
+    // ==========================================
+    // 4. WIRING UP THE CABLES (Mouse Events)
+    // ==========================================
+    
+    // Clicking the dark void closes the show
+    slideshowEl.addEventListener('click', closeSlideshow);
+    
+    // Prevent clicks on the image itself from closing the show
+    stageContainerEl.addEventListener('click', (event) => {
+      event.stopPropagation(); 
+    });
+
+    // Click left zone to go backward
+    zoneLeftEl.addEventListener('click', (event) => {
+      event.stopPropagation(); // Keep the show open
+      changeSlide(-1);
+    });
+
+    // Click right zone to go forward
+    zoneRightEl.addEventListener('click', (event) => {
+      event.stopPropagation(); // Keep the show open
+      changeSlide(1);
+    });
+
+    // ==========================================
+    // 5. MIDI CONTROLLER (Keyboard Events)
+    // ==========================================
+    
+    document.addEventListener('keydown', (event) => {
+      // Only listen for keys if the slideshow is actually open
+      if (slideshowEl.classList.contains('active')) {
+        if (event.key === 'ArrowLeft') {
+          changeSlide(-1);
+        } else if (event.key === 'ArrowRight') {
+          changeSlide(1);
+        } else if (event.key === 'Escape') {
+          closeSlideshow(); // Bonus feature: Esc key ends the show
+        }
+      }
+    });
+
+  </script>
 
 </body>
 <script src="script.js" defer></script>
